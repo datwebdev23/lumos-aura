@@ -1,26 +1,552 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ============================================
+     COLOR TOKENS — Figma direction
+     Luxury minimal white editorial
+  ============================================ */
+
+  /* Core backgrounds */
+  --color-white:      #FFFFFF;
+  --color-off-white:  #F8F6F1;
+  --color-surface:    #F2EFE9;
+  --color-border:     #E8E4DC;
+  --color-border-mid: #D4CFC6;
+
+  /* Core text */
+  --color-ink:        #1A1A1A;
+  --color-ink-mid:    #4A4A4A;
+  --color-ink-muted:  #6B6B6B;
+  --color-ink-faint:  #9A9A9A;
+
+  /* Gold accent */
+  --color-gold:       #B8962E;
+  --color-gold-light: #D4AE4A;
+  --color-gold-faint: #F0E4B8;
+
+  /* Navy — hero background */
+  --color-navy:       #0D1B2A;
+  --color-navy-mid:   #1A2E42;
+
+  /* Semantic */
+  --color-success:    #2D6A4F;
+  --color-warning:    #B8962E;
+  --color-error:      #C0392B;
+
+  /* ============================================
+     TYPOGRAPHY TOKENS
+  ============================================ */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans:    "Jost", system-ui, sans-serif;
+
+  /* ============================================
+     SPACING TOKENS
+  ============================================ */
+  --space-section:    96px;
+  --space-section-sm: 64px;
+  --space-container:  1280px;
+
+  /* ============================================
+     SHADOW TOKENS
+  ============================================ */
+  --shadow-card: 0 2px 12px rgba(26, 26, 26, 0.06);
+  --shadow-hover: 0 8px 32px rgba(26, 26, 26, 0.10);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================
+   BASE STYLES
+============================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--color-ink);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    cursor: pointer;
+    font-family: var(--font-sans);
+  }
+
+  input, textarea, select {
+    font-family: var(--font-sans);
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* ============================================
+   TYPOGRAPHY UTILITY CLASSES
+============================================ */
+@layer components {
+
+  /* Display — large editorial headings */
+  .text-hero {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  .text-display {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--color-ink);
+  }
+
+  .text-heading {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--color-ink);
+  }
+
+  .text-subheading {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--color-ink);
+  }
+
+  /* Label — uppercase tracking */
+  .text-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .text-label-gold {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  /* Body */
+  .text-body {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--color-ink-mid);
+  }
+
+  .text-body-sm {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+  }
+
+  .text-price {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--color-ink);
+  }
+
+  .text-price-sm {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--color-ink);
+  }
+
+  /* ============================================
+     LAYOUT UTILITIES
+  ============================================ */
+
+  .lumos-container {
+    max-width: var(--space-container);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .lumos-section {
+    padding-top: var(--space-section);
+    padding-bottom: var(--space-section);
+  }
+
+  .lumos-section-sm {
+    padding-top: var(--space-section-sm);
+    padding-bottom: var(--space-section-sm);
+  }
+
+  /* ============================================
+     BUTTON SYSTEM — Figma direction
+     Sharp rectangle, uppercase, letter-spacing
+  ============================================ */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background-color: var(--color-ink);
+    color: var(--color-white);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-navy);
+  }
+
+  .btn-gold {
+    background-color: var(--color-gold);
+    color: var(--color-white);
+  }
+  .btn-gold:hover {
+    background-color: var(--color-gold-light);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-ink);
+  }
+  .btn-ghost:hover {
+    background-color: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  .btn-ghost-white {
+    background-color: transparent;
+    color: var(--color-white);
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+  .btn-ghost-white:hover {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+  }
+
+  .btn-sm {
+    padding: 10px 20px;
+    font-size: 10px;
+  }
+
+  .btn-lg {
+    padding: 18px 48px;
+    font-size: 12px;
+  }
+
+  /* ============================================
+     BADGE SYSTEM
+  ============================================ */
+
+  .badge {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid currentColor;
+  }
+
+  .badge-default {
+    color: var(--color-ink-muted);
+    border-color: var(--color-border-mid);
+  }
+
+  .badge-gold {
+    color: var(--color-gold);
+    border-color: var(--color-gold-faint);
+    background-color: var(--color-gold-faint);
+  }
+
+  .badge-success {
+    color: var(--color-success);
+    border-color: currentColor;
+  }
+
+  /* ============================================
+     SECTION LABEL — gold divider + caps
+  ============================================ */
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .section-label::before,
+  .section-label::after {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 1px;
+    background-color: var(--color-gold);
+    flex-shrink: 0;
+  }
+
+  .section-label span {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  /* Left-aligned — no right line */
+  .section-label-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .section-label-left::before {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 1px;
+    background-color: var(--color-gold);
+    flex-shrink: 0;
+  }
+
+  .section-label-left span {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  /* ============================================
+     CARD SYSTEM
+  ============================================ */
+
+  .card-product {
+    background-color: var(--color-white);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .card-product:hover {
+    transform: translateY(-3px);
+  }
+
+  .card-surface {
+    background-color: var(--color-off-white);
+    border: 1px solid var(--color-border);
+  }
+
+  /* ============================================
+     FORM SYSTEM
+  ============================================ */
+
+  .form-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    margin-bottom: 8px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-border-mid);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-ink);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .form-input:focus {
+    border-bottom-color: var(--color-ink);
+  }
+  .form-input::placeholder {
+    color: var(--color-ink-faint);
+  }
+
+  .form-input-box {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-ink);
+    outline: none;
+    transition: border-color 0.2s ease;
+    border-radius: 0;
+  }
+  .form-input-box:focus {
+    border-color: var(--color-ink);
+  }
+
+  /* ============================================
+     DIVIDERS
+  ============================================ */
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-border);
+  }
+
+  .divider-gold {
+    width: 48px;
+    height: 2px;
+    background-color: var(--color-gold);
+  }
+
+  /* ============================================
+     RESPONSIVE GRID LAYOUTS
+  ============================================ */
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .policy-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ============================================
+     ANIMATIONS
+  ============================================ */
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease forwards;
+  }
+
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.2s; opacity: 0; }
+  .delay-3 { animation-delay: 0.3s; opacity: 0; }
+  .delay-4 { animation-delay: 0.4s; opacity: 0; }
+  .delay-5 { animation-delay: 0.5s; opacity: 0; }
+
+  /* ============================================
+     RESPONSIVE BREAKPOINTS
+  ============================================ */
+
+  @media (max-width: 768px) {
+    .lumos-container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .lumos-section {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .policy-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hidden-mobile {
+      display: none !important;
+    }
+
+    .show-mobile {
+      display: flex !important;
+    }
+
+    .footer-grid {
+  grid-template-columns: 1fr 1fr !important;
+  gap: 40px !important;
+  }
+
+  @media (min-width: 769px) {
+    .hidden-desktop {
+      display: none !important;
+    }
+  }
+} }
