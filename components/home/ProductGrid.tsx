@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Badge } from "@/components/ui";
+import { Button } from "@/components/ui";
+import SectionLabel from "@/components/ui/SectionLabel";
 
-const tabs = ["Tất cả", "Nến thơm", "Set quà tặng", "Custom"];
+const tabs = ["All", "Nến thơm", "Set quà tặng", "Custom"];
 
 const products = [
   {
@@ -14,6 +17,7 @@ const products = [
     category: "Nến thơm",
     badge: null,
     scent: "Lavender · Vanilla · Musk",
+    bg: "#E8E0D8",
   },
   {
     id: 2,
@@ -23,6 +27,7 @@ const products = [
     category: "Nến thơm",
     badge: "Mới",
     scent: "Pine · Orange · Cedar",
+    bg: "#DDD5CC",
   },
   {
     id: 3,
@@ -32,6 +37,7 @@ const products = [
     category: "Custom",
     badge: "Bán chạy",
     scent: "Theo tính cách của bạn",
+    bg: "#E4DDD8",
   },
   {
     id: 4,
@@ -41,6 +47,7 @@ const products = [
     category: "Set quà tặng",
     badge: "Sale",
     scent: "Nến + Phụ kiện + Thiệp",
+    bg: "#D8D0C8",
   },
   {
     id: 5,
@@ -50,6 +57,7 @@ const products = [
     category: "Nến thơm",
     badge: null,
     scent: "Rose · Oud · Amber",
+    bg: "#E0D8D5",
   },
   {
     id: 6,
@@ -59,6 +67,7 @@ const products = [
     category: "Set quà tặng",
     badge: "Cao cấp",
     scent: "Nến + Tinh dầu + Thiệp tay",
+    bg: "#D5CEC8",
   },
   {
     id: 7,
@@ -66,8 +75,9 @@ const products = [
     price: 195000,
     originalPrice: null,
     category: "Custom",
-    badge: "Nghệ thuật",
+    badge: null,
     scent: "Jasmine · White Tea",
+    bg: "#DDD8D0",
   },
   {
     id: 8,
@@ -77,90 +87,69 @@ const products = [
     category: "Nến thơm",
     badge: null,
     scent: "Coconut · Lime · Sea Salt",
+    bg: "#E8E4DC",
   },
 ];
 
-const badgeColors: Record<string, { bg: string; color: string }> = {
-  "Mới":       { bg: "rgba(107,124,92,0.15)",  color: "var(--color-olive)" },
-  "Bán chạy":  { bg: "rgba(201,169,110,0.15)", color: "var(--color-gold-dark)" },
-  "Sale":      { bg: "rgba(139,111,78,0.15)",  color: "var(--color-brown)" },
-  "Cao cấp":   { bg: "rgba(201,169,110,0.12)", color: "var(--color-gold-dark)" },
-  "Nghệ thuật":{ bg: "rgba(107,124,92,0.15)",  color: "var(--color-olive)" },
-};
-
-function formatPrice(price: number) {
-  return price.toLocaleString("vi-VN") + "đ";
+function formatPrice(p: number) {
+  return p.toLocaleString("vi-VN") + "đ";
 }
 
 export default function ProductGrid() {
-  const [activeTab, setActiveTab] = useState("Tất cả");
+  const [activeTab, setActiveTab] = useState("All");
 
-  const filtered = activeTab === "Tất cả"
+  const filtered = activeTab === "All"
     ? products
     : products.filter((p) => p.category === activeTab);
 
   return (
     <section style={{
-      backgroundColor: "var(--color-beige)",
-      padding: "96px 32px",
+      backgroundColor: "var(--color-white)",
+      paddingTop: "96px",
+      paddingBottom: "96px",
     }}>
-      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+      <div className="lumos-container">
 
-        {/* Section header */}
+        {/* Header */}
         <div style={{
           display: "flex",
-          flexWrap: "wrap",
           alignItems: "flex-end",
           justifyContent: "space-between",
+          flexWrap: "wrap",
           gap: "24px",
           marginBottom: "48px",
-        }}className="animate-fade-in-up delay-1">
+        }}>
           <div>
-            <div style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "12px",
-              marginBottom: "12px",
-            }}>
-              <div style={{ width: "32px", height: "1px", backgroundColor: "var(--color-gold)" }} />
-              <span style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "11px",
-                letterSpacing: "0.3em",
-                textTransform: "uppercase",
-                color: "var(--color-gold)",
-              }}>
-                Sản phẩm
-              </span>
-            </div>
-            <h2 style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 3.5vw, 42px)",
-              fontWeight: 300,
-              color: "var(--color-brown-dark)",
-            }}>
+            <SectionLabel align="left">Sản phẩm</SectionLabel>
+            <h2 className="text-display" style={{ color: "var(--color-ink)" }}>
               Được yêu thích nhất
             </h2>
           </div>
 
           {/* Filter tabs */}
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 style={{
-                  padding: "8px 20px",
-                  borderRadius: "100px",
+                  padding: "8px 18px",
                   border: "1px solid",
-                  borderColor: activeTab === tab ? "var(--color-brown)" : "var(--color-sand)",
-                  backgroundColor: activeTab === tab ? "var(--color-brown)" : "transparent",
-                  color: activeTab === tab ? "var(--color-cream)" : "var(--color-brown)",
+                  borderColor: activeTab === tab
+                    ? "var(--color-ink)"
+                    : "var(--color-border)",
+                  backgroundColor: activeTab === tab
+                    ? "var(--color-ink)"
+                    : "transparent",
+                  color: activeTab === tab
+                    ? "var(--color-white)"
+                    : "var(--color-ink-muted)",
                   fontFamily: "var(--font-sans)",
-                  fontSize: "12px",
+                  fontSize: "11px",
                   letterSpacing: "0.08em",
                   cursor: "pointer",
                   transition: "all 0.2s ease",
+                  borderRadius: 0,
                 }}
               >
                 {tab}
@@ -169,76 +158,69 @@ export default function ProductGrid() {
           </div>
         </div>
 
-        {/* Product grid */}
+        {/* Grid */}
         <div style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-          gap: "24px",
+          gap: "2px",
         }}>
           {filtered.map((product) => (
             <Link
               key={product.id}
               href={`/products/${product.id}`}
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", display: "block" }}
             >
               <div
-                style={{
-                  backgroundColor: "var(--color-cream)",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  cursor: "pointer",
-                }}
+                style={{ cursor: "pointer" }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow = "var(--shadow-warm-lg)";
+                  const img = e.currentTarget.querySelector(".product-img") as HTMLElement;
+                  if (img) img.style.transform = "scale(1.04)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
+                  const img = e.currentTarget.querySelector(".product-img") as HTMLElement;
+                  if (img) img.style.transform = "scale(1)";
                 }}
               >
-                {/* Image placeholder */}
+                {/* Image */}
                 <div style={{
                   width: "100%",
                   aspectRatio: "1 / 1",
-                  backgroundColor: "var(--color-sand)",
+                  overflow: "hidden",
                   position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  backgroundColor: product.bg,
                 }}>
-                  <div style={{
-                    width: "64px",
-                    height: "80px",
-                    backgroundColor: "var(--color-brown-light)",
-                    borderRadius: "4px 4px 2px 2px",
-                    opacity: 0.5,
-                    position: "relative",
-                  }}>
-                    {/* Candle wick */}
-                    <div style={{
+                  <div
+                    className="product-img"
+                    style={{
                       position: "absolute",
-                      top: "-12px",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: "2px",
-                      height: "12px",
-                      backgroundColor: "var(--color-brown-dark)",
-                      borderRadius: "1px",
-                    }} />
-                    {/* Flame */}
-                    <div style={{
-                      position: "absolute",
-                      top: "-24px",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: "8px",
-                      height: "14px",
-                      backgroundColor: "var(--color-gold)",
-                      borderRadius: "50% 50% 30% 30%",
-                      opacity: 0.8,
-                    }} />
+                      inset: 0,
+                      backgroundColor: product.bg,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "transform 0.5s ease",
+                    }}
+                  >
+                    {/* Candle icon */}
+                    <div style={{ opacity: 0.5 }}>
+                      <div style={{
+                        width: "2px", height: "12px",
+                        backgroundColor: "#8B6F4E",
+                        margin: "0 auto",
+                      }} />
+                      <div style={{
+                        width: "8px", height: "12px",
+                        backgroundColor: "#C9A96E",
+                        borderRadius: "50% 50% 30% 30%",
+                        margin: "-4px auto 0",
+                      }} />
+                      <div style={{
+                        width: "52px", height: "64px",
+                        backgroundColor: "#A08060",
+                        margin: "0 auto",
+                        borderRadius: "1px",
+                      }} />
+                    </div>
                   </div>
 
                   {/* Badge */}
@@ -247,28 +229,26 @@ export default function ProductGrid() {
                       position: "absolute",
                       top: "12px",
                       left: "12px",
-                      padding: "4px 10px",
-                      borderRadius: "100px",
-                      backgroundColor: badgeColors[product.badge]?.bg,
-                      fontFamily: "var(--font-sans)",
-                      fontSize: "10px",
-                      fontWeight: 500,
-                      letterSpacing: "0.08em",
-                      color: badgeColors[product.badge]?.color,
                     }}>
-                      {product.badge}
+                      <Badge variant={
+                        product.badge === "Bán chạy" || product.badge === "Cao cấp"
+                          ? "gold"
+                          : "default"
+                      }>
+                        {product.badge}
+                      </Badge>
                     </div>
                   )}
                 </div>
 
-                {/* Product info */}
-                <div style={{ padding: "20px" }}>
+                {/* Info */}
+                <div style={{ padding: "16px 4px" }}>
                   <p style={{
                     fontFamily: "var(--font-sans)",
                     fontSize: "10px",
-                    letterSpacing: "0.15em",
+                    letterSpacing: "0.12em",
                     textTransform: "uppercase",
-                    color: "var(--color-gold)",
+                    color: "var(--color-ink-faint)",
                     marginBottom: "6px",
                   }}>
                     {product.scent}
@@ -277,18 +257,22 @@ export default function ProductGrid() {
                     fontFamily: "var(--font-display)",
                     fontSize: "18px",
                     fontWeight: 400,
-                    color: "var(--color-brown-dark)",
-                    marginBottom: "12px",
+                    color: "var(--color-ink)",
+                    marginBottom: "8px",
                     lineHeight: 1.3,
                   }}>
                     {product.name}
                   </h3>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                  }}>
                     <span style={{
-                      fontFamily: "var(--font-sans)",
+                      fontFamily: "var(--font-display)",
                       fontSize: "16px",
-                      fontWeight: 500,
-                      color: "var(--color-brown)",
+                      fontWeight: 400,
+                      color: "var(--color-ink)",
                     }}>
                       {formatPrice(product.price)}
                     </span>
@@ -296,7 +280,7 @@ export default function ProductGrid() {
                       <span style={{
                         fontFamily: "var(--font-sans)",
                         fontSize: "13px",
-                        color: "rgba(139,111,78,0.4)",
+                        color: "var(--color-ink-faint)",
                         textDecoration: "line-through",
                       }}>
                         {formatPrice(product.originalPrice)}
@@ -309,11 +293,11 @@ export default function ProductGrid() {
           ))}
         </div>
 
-        {/* View all CTA */}
-        <div style={{ textAlign: "center", marginTop: "48px" }}>
-          <Link href="/products" className="btn-outline">
-            Xem tất cả sản phẩm
-          </Link>
+        {/* View all */}
+        <div style={{ textAlign: "center", marginTop: "56px" }}>
+          <Button variant="ghost" href="/products">
+            View All Products
+          </Button>
         </div>
       </div>
     </section>

@@ -1,195 +1,243 @@
 "use client";
 
 import Link from "next/link";
+import SectionLabel from "@/components/ui/SectionLabel";
 
-const categories = [
+const featured = {
+  tag: "Curated Set",
+  title: "The Midnight Ritual",
+  description: "Bộ sưu tập nến cao cấp — mùi hương được phối riêng cho những khoảnh khắc tĩnh lặng.",
+  href: "/collections/midnight",
+  cta: "Discover Collection",
+};
+
+const secondary = [
   {
-    title: "Aura Basic",
-    subtitle: "Bộ sưu tập cơ bản",
-    description: "Nến hũ thủy tinh tối giản với các mùi hương thư giãn tiêu chuẩn.",
-    href: "/collections/basic",
-    accent: "var(--color-gold)",
-    bg: "var(--color-brown-dark)",
-  },
-  {
+    tag: "Signature",
     title: "Custom Mùi Hương",
-    subtitle: "Signature collection",
-    description: "Làm bài Scent Quiz — hệ thống tự phối mùi hương theo tính cách của bạn.",
     href: "/quiz",
-    accent: "var(--color-gold-light)",
-    bg: "var(--color-brown)",
-    featured: true,
   },
   {
-    title: "Gift Box",
-    subtitle: "Quà tặng tinh tế",
-    description: "Hộp quà sang trọng — nến thơm, phụ kiện và thiệp viết tay.",
+    tag: "Gifting",
+    title: "Gift Box Collection",
     href: "/collections/giftbox",
-    accent: "var(--color-sand)",
-    bg: "var(--color-brown-deep)",
   },
 ];
 
 export default function CategoryCards() {
   return (
     <section style={{
-      backgroundColor: "var(--color-cream)",
-      padding: "96px 32px",
+      backgroundColor: "var(--color-white)",
+      paddingTop: "96px",
+      paddingBottom: "96px",
     }}>
-      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+      <div className="lumos-container">
 
         {/* Section header */}
-        <div style={{ textAlign: "center", marginBottom: "56px" }}className="animate-fade-in-up delay-1">
-          <div style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "12px",
-            marginBottom: "16px",
-          }}>
-            <div style={{ width: "32px", height: "1px", backgroundColor: "var(--color-gold)" }} />
-            <span style={{
-              fontFamily: "var(--font-sans)",
-              fontSize: "11px",
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              color: "var(--color-gold)",
-            }}>
-              Bộ sưu tập
-            </span>
-            <div style={{ width: "32px", height: "1px", backgroundColor: "var(--color-gold)" }} />
-          </div>
-          <h2 style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(32px, 4vw, 48px)",
-            fontWeight: 300,
-            color: "var(--color-brown-dark)",
-            letterSpacing: "0.02em",
-          }}>
+        <div style={{ textAlign: "center", marginBottom: "56px" }}>
+          <SectionLabel>Featured Gifts</SectionLabel>
+          <h2 className="text-display" style={{ color: "var(--color-ink)" }}>
             Tìm ngọn nến của bạn
           </h2>
         </div>
 
-        {/* Cards grid */}
+        {/* Editorial grid — 1 large left + 2 small right */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "24px",
-        }}>
-          {categories.map((cat) => (
-            <Link
-              key={cat.title}
-              href={cat.href}
-              style={{ textDecoration: "none" }}
+          gridTemplateColumns: "1fr 0.65fr",
+          gridTemplateRows: "auto",
+          gap: "12px",
+        }}
+          className="featured-grid"
+        >
+
+          {/* Large card — left */}
+          <Link href={featured.href} style={{ textDecoration: "none", display: "block" }}>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                aspectRatio: "4 / 3",
+                backgroundColor: "var(--color-surface)",
+                overflow: "hidden",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                const img = e.currentTarget.querySelector(".card-img") as HTMLElement;
+                if (img) img.style.transform = "scale(1.04)";
+              }}
+              onMouseLeave={(e) => {
+                const img = e.currentTarget.querySelector(".card-img") as HTMLElement;
+                if (img) img.style.transform = "scale(1)";
+              }}
             >
+              {/* Image placeholder */}
               <div
+                className="card-img"
                 style={{
-                  backgroundColor: cat.bg,
-                  borderRadius: "16px",
-                  padding: "48px 36px",
-                  height: "100%",
-                  minHeight: "320px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  cursor: "pointer",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  position: "relative",
-                  overflow: "hidden",
-                  border: cat.featured ? `1px solid rgba(201,169,110,0.3)` : "1px solid transparent",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-6px)";
-                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(28,20,16,0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                {/* Decorative glow */}
-                <div style={{
                   position: "absolute",
-                  top: "-40px",
-                  right: "-40px",
-                  width: "160px",
-                  height: "160px",
-                  borderRadius: "50%",
-                  background: `radial-gradient(circle, rgba(201,169,110,0.1) 0%, transparent 70%)`,
-                  pointerEvents: "none",
-                }} />
-
-                {cat.featured && (
-                  <div style={{
-                    position: "absolute",
-                    top: "20px",
-                    right: "20px",
-                    backgroundColor: "rgba(201,169,110,0.15)",
-                    border: "1px solid rgba(201,169,110,0.3)",
-                    borderRadius: "100px",
-                    padding: "4px 12px",
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "10px",
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    color: "var(--color-gold-light)",
-                  }}>
-                    Phổ biến nhất
-                  </div>
-                )}
-
-                <div>
-                  <p style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "10px",
-                    letterSpacing: "0.25em",
-                    textTransform: "uppercase",
-                    color: cat.accent,
-                    opacity: 0.7,
-                    marginBottom: "12px",
-                  }}>
-                    {cat.subtitle}
-                  </p>
-                  <h3 style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "32px",
-                    fontWeight: 400,
-                    color: "var(--color-cream)",
-                    marginBottom: "16px",
-                    lineHeight: 1.1,
-                  }}>
-                    {cat.title}
-                  </h3>
-                  <p style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "14px",
-                    fontWeight: 300,
-                    lineHeight: 1.7,
-                    color: "rgba(232,217,200,0.65)",
-                  }}>
-                    {cat.description}
-                  </p>
-                </div>
-
-                <div style={{
+                  inset: 0,
+                  background: "linear-gradient(135deg, #2C1F1A 0%, #4A3020 40%, #6B4A30 100%)",
+                  transition: "transform 0.6s ease",
                   display: "flex",
                   alignItems: "center",
-                  gap: "8px",
-                  marginTop: "32px",
-                }}>
-                  <span style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "12px",
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    color: cat.accent,
-                  }}>
-                    Khám phá
-                  </span>
-                  <span style={{ color: cat.accent, fontSize: "16px" }}>→</span>
+                  justifyContent: "center",
+                }}
+              >
+                {/* Candle illustration */}
+                <div style={{ position: "relative", opacity: 0.6 }}>
+                  <div style={{
+                    width: "2px", height: "16px",
+                    backgroundColor: "#C9A96E",
+                    margin: "0 auto",
+                  }} />
+                  <div style={{
+                    width: "10px", height: "16px",
+                    backgroundColor: "#E8C84A",
+                    borderRadius: "50% 50% 30% 30%",
+                    margin: "-8px auto 0",
+                    opacity: 0.8,
+                  }} />
+                  <div style={{
+                    width: "80px", height: "100px",
+                    backgroundColor: "#8B6F4E",
+                    borderRadius: "2px",
+                    margin: "0 auto",
+                  }} />
                 </div>
               </div>
-            </Link>
-          ))}
+
+              {/* Overlay */}
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to top, rgba(13,27,42,0.85) 0%, rgba(13,27,42,0.2) 50%, transparent 100%)",
+              }} />
+
+              {/* Text overlay */}
+              <div style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: "32px",
+              }}>
+                <span style={{
+                  display: "inline-block",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "9px",
+                  fontWeight: 500,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.7)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                  padding: "4px 10px",
+                  marginBottom: "12px",
+                }}>
+                  {featured.tag}
+                </span>
+                <h3 style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "28px",
+                  fontWeight: 400,
+                  color: "var(--color-white)",
+                  marginBottom: "16px",
+                  lineHeight: 1.1,
+                }}>
+                  {featured.title}
+                </h3>
+                <span style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "12px",
+                  letterSpacing: "0.08em",
+                  color: "var(--color-gold-light)",
+                  textDecoration: "none",
+                }}>
+                  {featured.cta} →
+                </span>
+              </div>
+            </div>
+          </Link>
+
+          {/* Right column — 2 stacked cards */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {secondary.map((item, i) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                style={{ textDecoration: "none", flex: 1, display: "block" }}
+              >
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    minHeight: "180px",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    backgroundColor: i === 0 ? "#E8D9C8" : "#C8D4CC",
+                  }}
+                  onMouseEnter={(e) => {
+                    const img = e.currentTarget.querySelector(".card-img-sm") as HTMLElement;
+                    if (img) img.style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    const img = e.currentTarget.querySelector(".card-img-sm") as HTMLElement;
+                    if (img) img.style.transform = "scale(1)";
+                  }}
+                >
+                  {/* Bg */}
+                  <div
+                    className="card-img-sm"
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: i === 0
+                        ? "linear-gradient(135deg, #E8D0B0 0%, #C4A882 100%)"
+                        : "linear-gradient(135deg, #D0D8D0 0%, #A8B8A8 100%)",
+                      transition: "transform 0.5s ease",
+                    }}
+                  />
+
+                  {/* Overlay */}
+                  <div style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(to top, rgba(26,26,26,0.6) 0%, transparent 60%)",
+                  }} />
+
+                  {/* Text */}
+                  <div style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    padding: "20px 24px",
+                  }}>
+                    <p style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "9px",
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,0.6)",
+                      marginBottom: "6px",
+                    }}>
+                      {item.tag}
+                    </p>
+                    <h3 style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "20px",
+                      fontWeight: 400,
+                      color: "var(--color-white)",
+                      lineHeight: 1.1,
+                    }}>
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -5,7 +5,6 @@ import Link from "next/link";
 export default function HeroSection() {
   return (
     <section className="lumos-hero">
-
       {/* Background image placeholder — warm candle atmosphere */}
       <div className="lumos-hero-bg" />
 
@@ -15,30 +14,27 @@ export default function HeroSection() {
       {/* Content */}
       <div className="lumos-container lumos-hero-content">
         <div className="lumos-hero-inner">
-  {/* Eyebrow label */}
-  <div className="lumos-eyebrow animate-fade-in-up delay-1">
-    <div className="lumos-eyebrow-line" />
+          {/* Eyebrow label */}
+          <div className="lumos-eyebrow animate-fade-in-up delay-1">
+            <div className="lumos-eyebrow-line" />
 
-    <span className="text-label-gold">
-      Handcrafted Scented Candles
-    </span>
-  </div>
+            <span className="text-label-gold">Handcrafted Scented Candles</span>
+          </div>
 
           {/* Main headline */}
-  <h1 className="text-display-hero-dark animate-fade-in-up delay-2">
-    Đốt nến lên,
-    <br />
-    <em className="text-gold-highlight">
-      viết câu chuyện
-    </em>
-    <br />
-    của bạn.
-  </h1>
+          <h1 className="text-display-hero-dark animate-fade-in-up delay-2">
+            Đốt nến lên,
+            <br />
+            <em className="text-gold-highlight">viết câu chuyện</em>
+            <br />
+            của bạn.
+          </h1>
 
           {/* Subheadline */}
-<p className="hero-description animate-fade-in-up delay-3">
-  Khám phá những hũ nến thơm được chế tác thủ công, mang đến cảm giác thư giãn, ấm áp và tinh tế cho không gian sống của bạn.
-</p>
+          <p className="hero-description animate-fade-in-up delay-3">
+            Khám phá những hũ nến thơm được chế tác thủ công, mang đến cảm giác
+            thư giãn, ấm áp và tinh tế cho không gian sống của bạn.
+          </p>
 
           {/* CTA buttons */}
           <div className="hero-actions animate-fade-in-up delay-4">
