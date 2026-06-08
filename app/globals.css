@@ -756,209 +756,250 @@
     }
   }
 
-  /* ============================================
-   ORDER CONFIRMED PAGE
+/* ============================================
+   ORDER CONFIRMED PAGE — Phase 3 redesign
 ============================================ */
 .confirmed-page {
-  background-color: var(--color-off-white);
   min-height: 100vh;
-  padding-top: 64px;
+  background-color: var(--color-off-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 80px 24px 96px;
 }
 
-.confirmed-wrapper {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 64px 24px 96px;
-}
-
-.confirmed-hero {
-  text-align: center;
-  padding-bottom: 56px;
-  margin-bottom: 56px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.confirmed-check {
-  width: 56px;
-  height: 56px;
+.confirmed-icon-wrap {
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  border: 1.5px solid var(--color-gold);
+  background-color: var(--color-surface);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 28px;
 }
 
-.confirmed-brand {
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--color-ink-muted);
-  margin-bottom: 16px;
+.confirmed-icon-star {
+  width: 28px;
+  height: 28px;
+  color: #7A6245;
 }
 
 .confirmed-headline {
   font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 60px);
+  font-size: clamp(36px, 5vw, 56px);
   font-weight: 400;
   color: var(--color-ink);
-  line-height: 1.1;
+  line-height: 1.05;
+  text-align: center;
   margin-bottom: 16px;
+  letter-spacing: -0.01em;
+  max-width: 560px;
 }
 
 .confirmed-subtext {
   font-family: var(--font-sans);
   font-size: 14px;
   color: var(--color-ink-muted);
-  max-width: 420px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-.confirmed-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-bottom: 56px;
+  text-align: center;
+  line-height: 1.75;
+  max-width: 400px;
+  margin: 0 auto 48px;
 }
 
 .confirmed-card {
+  width: 100%;
+  max-width: 580px;
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
-  padding: 32px;
 }
 
-.confirmed-card-label {
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-ink-muted);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.confirmed-card-label-icon {
-  font-size: 14px;
-}
-
-.confirmed-order-row {
+.confirmed-card-meta {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 10px 0;
+  padding: 20px 24px;
   border-bottom: 1px solid var(--color-border);
-  gap: 16px;
 }
 
-.confirmed-order-row:last-child {
-  border-bottom: none;
+.confirmed-meta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.confirmed-order-name {
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 400;
-  color: var(--color-ink);
-  margin-bottom: 2px;
-}
-
-.confirmed-order-meta {
+.confirmed-meta-label {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--color-ink-faint);
 }
 
-.confirmed-order-price {
+.confirmed-meta-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-ink);
+  letter-spacing: 0.03em;
+}
+
+.confirmed-meta-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: #7A6245;
+}
+
+.confirmed-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #7A6245;
+  flex-shrink: 0;
+}
+
+.confirmed-order-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  padding: 20px 24px 12px;
+}
+
+.confirmed-item-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 0 24px 20px;
+}
+
+.confirmed-item-thumb {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.confirmed-item-thumb-placeholder {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.confirmed-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.confirmed-item-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--color-ink);
+  margin-bottom: 3px;
+  line-height: 1.2;
+}
+
+.confirmed-item-sub {
   font-family: var(--font-sans);
   font-size: 13px;
+  color: var(--color-ink-muted);
+  margin-bottom: 10px;
+}
+
+.confirmed-qty-badge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  border: 1px solid var(--color-border);
+  padding: 3px 8px;
+}
+
+.confirmed-item-price {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
   color: var(--color-ink);
   white-space: nowrap;
 }
 
-.confirmed-total-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 16px 0 0;
-  border-top: 1px solid var(--color-ink);
-  margin-top: 8px;
+.confirmed-tracking-row {
+  padding: 16px 24px 20px;
+  border-top: 1px solid var(--color-border);
 }
 
-.confirmed-total-label {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--color-ink);
-}
-
-.confirmed-total-value {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 400;
-  color: var(--color-ink);
-}
-
-.confirmed-shipping-name {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-ink);
-  margin-bottom: 8px;
-}
-
-.confirmed-shipping-address {
+.confirmed-tracking-link {
   font-family: var(--font-sans);
   font-size: 13px;
-  color: var(--color-ink-muted);
-  line-height: 1.8;
-  margin-bottom: 20px;
+  color: #7A6245;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: opacity 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.confirmed-delivery-label {
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  margin-bottom: 6px;
+.confirmed-tracking-link:hover {
+  opacity: 0.7;
 }
 
-.confirmed-delivery-date {
+.confirmed-cta-wrap {
+  margin-top: 40px;
+}
+
+.confirmed-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 40px;
+  background-color: #5C4A38;
+  color: var(--color-white);
+  border: none;
+  border-radius: 100px;
   font-family: var(--font-sans);
   font-size: 14px;
-  color: var(--color-ink);
-}
-
-.confirmed-cta {
-  text-align: center;
-}
-
-.confirmed-assistance {
-  margin-top: 16px;
-}
-
-.confirmed-assistance-text {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  color: var(--color-ink-faint);
-}
-
-.confirmed-assistance-link {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  color: var(--color-gold);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  background: none;
-  border: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.confirmed-cta-btn:hover {
+  background-color: var(--color-navy);
+}
+
+@media (max-width: 640px) {
+  .confirmed-page {
+    padding: 60px 16px 80px;
+  }
+
+  .confirmed-card-meta {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .confirmed-item-row {
+    flex-wrap: wrap;
+  }
+
+  .confirmed-item-price {
+    width: 100%;
+    margin-top: 8px;
+  }
 }
 
 @media (max-width: 768px) {
