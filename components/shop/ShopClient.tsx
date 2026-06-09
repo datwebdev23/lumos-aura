@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import ProductCard, { Product } from "./ProductCard";
 import FilterSidebar from "./FilterSidebar";
+import { PRODUCT_IMAGES } from "@/lib/images";
 
 const ALL_PRODUCTS: Product[] = [
   {
@@ -14,6 +15,7 @@ const ALL_PRODUCTS: Product[] = [
     category: "woody",
     badge: "Bestseller",
     bg: "#2C1F1A",
+    image: PRODUCT_IMAGES.midnightCedar,
   },
   {
     id: 2,
@@ -23,6 +25,7 @@ const ALL_PRODUCTS: Product[] = [
     burnTime: "80 Hours",
     category: "woody",
     bg: "#3D2E24",
+    image: PRODUCT_IMAGES.paloSanto,
   },
   {
     id: 3,
@@ -32,6 +35,7 @@ const ALL_PRODUCTS: Product[] = [
     burnTime: "60 Hours",
     category: "fresh",
     bg: "#4A3828",
+    image: PRODUCT_IMAGES.santalEmbers,
   },
   {
     id: 4,
@@ -42,6 +46,7 @@ const ALL_PRODUCTS: Product[] = [
     category: "floral",
     badge: "New",
     bg: "#E8E0D8",
+    image: PRODUCT_IMAGES.etherealBloom,
   },
   {
     id: 5,
@@ -51,6 +56,7 @@ const ALL_PRODUCTS: Product[] = [
     burnTime: "80 Hours",
     category: "spicy",
     bg: "#D4C8B8",
+    image: PRODUCT_IMAGES.celestialAmber,
   },
   {
     id: 6,
@@ -60,6 +66,7 @@ const ALL_PRODUCTS: Product[] = [
     burnTime: "60 Hours",
     category: "woody",
     bg: "#5C4A38",
+    image: PRODUCT_IMAGES.santalEmbers,
   },
   {
     id: 7,
@@ -69,6 +76,7 @@ const ALL_PRODUCTS: Product[] = [
     burnTime: "40 Hours",
     category: "fresh",
     bg: "#C8D4C0",
+    image: PRODUCT_IMAGES.moonlitBloom,
   },
   {
     id: 8,
@@ -78,6 +86,7 @@ const ALL_PRODUCTS: Product[] = [
     burnTime: "60 Hours",
     category: "floral",
     bg: "#D8D0E0",
+    image: PRODUCT_IMAGES.moonlitBloom,
   },
   {
     id: 9,
@@ -87,6 +96,7 @@ const ALL_PRODUCTS: Product[] = [
     burnTime: "80 Hours",
     category: "spicy",
     bg: "#4A3020",
+    image: PRODUCT_IMAGES.velvetSmoke,
   },
 ];
 

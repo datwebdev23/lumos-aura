@@ -9,6 +9,7 @@ export type Product = {
   category: string;
   badge?: string;
   bg: string;
+  image?: string;
 };
 
 interface ProductCardProps {
@@ -17,29 +18,26 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link
-      href={`/products/${product.id}`}
-      style={{ textDecoration: "none", display: "block" }}
-    >
+    <Link href={`/products/${product.id}`} style={{ textDecoration: "none", display: "block" }}>
       <div className="shop-product-card">
 
         {/* Image area */}
-        <div
-          className="shop-product-image"
-          style={{ backgroundColor: product.bg }}
-        >
-          {/* Candle illustration placeholder */}
-          <div className="shop-product-illustration">
-            <div className="shop-candle-wick" />
-            <div className="shop-candle-flame" />
-            <div className="shop-candle-body" />
-          </div>
-
-          {/* Badge */}
+        <div className="shop-product-image" style={{ backgroundColor: product.bg }}>
+          {product.image ? (
+            <img
+              src={product.image}
+              alt={product.name}
+              className="shop-product-img"
+            />
+          ) : (
+            <div className="shop-product-illustration">
+              <div className="shop-candle-wick" />
+              <div className="shop-candle-flame" />
+              <div className="shop-candle-body" />
+            </div>
+          )}
           {product.badge && (
-            <span className="shop-product-badge">
-              {product.badge}
-            </span>
+            <span className="shop-product-badge">{product.badge}</span>
           )}
         </div>
 
@@ -50,9 +48,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="shop-product-meta">
             <span className="shop-product-price">${product.price}.00</span>
             {product.burnTime && (
-              <span className="shop-product-burn">
-                · {product.burnTime}
-              </span>
+              <span className="shop-product-burn">· {product.burnTime}</span>
             )}
           </div>
         </div>

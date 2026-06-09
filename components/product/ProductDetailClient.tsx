@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button, Badge, QuantityStepper, StarRating } from "@/components/ui";
 import ReviewSection from "@/components/product/ReviewSection";
 import ProductCard, { Product } from "@/components/shop/ProductCard";
+import { PRODUCT_IMAGES } from "@/lib/images";
 
 const product = {
   id: 1,
@@ -32,55 +33,42 @@ const tabs = ["Mô tả", "Tầng hương", "Chi tiết"];
 
 const relatedProducts: Product[] = [
   {
-    id: 1,
-    name: "Midnight Cedar",
+    id: 1, name: "Midnight Cedar",
     scentNotes: "Sandalwood · Amber · Vetiver",
-    price: 45,
-    burnTime: "60 Hours",
-    category: "woody",
-    badge: "Bestseller",
-    bg: "#2C1F1A",
+    price: 45, burnTime: "60 Hours",
+    category: "woody", badge: "Bestseller",
+    bg: "#2C1F1A", image: PRODUCT_IMAGES.midnightCedar,
   },
   {
-    id: 2,
-    name: "Palo Santo Glow",
+    id: 2, name: "Palo Santo Glow",
     scentNotes: "Palo Santo · Myrrh · Bergamot",
-    price: 52,
-    burnTime: "80 Hours",
+    price: 52, burnTime: "80 Hours",
     category: "woody",
-    bg: "#3D2E24",
+    bg: "#3D2E24", image: PRODUCT_IMAGES.paloSanto,
   },
   {
-    id: 4,
-    name: "Ethereal Bloom",
+    id: 4, name: "Ethereal Bloom",
     scentNotes: "Rose · Bergamot · Patchouli",
-    price: 48,
-    burnTime: "60 Hours",
-    category: "floral",
-    badge: "New",
-    bg: "#E8E0D8",
+    price: 48, burnTime: "60 Hours",
+    category: "floral", badge: "New",
+    bg: "#E8E0D8", image: PRODUCT_IMAGES.etherealBloom,
   },
 ];
 
 const upsellProducts: Product[] = [
   {
-    id: 6,
-    name: "Velvet Smoke",
+    id: 6, name: "Velvet Smoke",
     scentNotes: "Cedar · Clove · Tonka",
-    price: 72,
-    burnTime: "80 Hours",
-    category: "woody",
-    badge: "New",
-    bg: "#3D2E24",
+    price: 72, burnTime: "80 Hours",
+    category: "woody", badge: "New",
+    bg: "#3D2E24", image: PRODUCT_IMAGES.velvetSmoke,
   },
   {
-    id: 8,
-    name: "Moonlit Bloom",
+    id: 8, name: "Moonlit Bloom",
     scentNotes: "Jasmine · Iris · Musk",
-    price: 68,
-    burnTime: "60 Hours",
+    price: 68, burnTime: "60 Hours",
     category: "floral",
-    bg: "#D8D0E0",
+    bg: "#D8D0E0", image: PRODUCT_IMAGES.moonlitBloom,
   },
 ];
 
@@ -183,6 +171,16 @@ const toggleFaq = (id: number) => {
               overflow: "hidden",
               marginBottom: "12px",
             }}>
+              <img
+    src={PRODUCT_IMAGES.etherealBloom}
+    alt="Celestial Bloom candle"
+    style={{
+      width: "100%", height: "100%",
+      objectFit: "cover",
+      display: "block",
+      transition: "transform 0.5s ease",
+    }}
+  />
               {/* Candle illustration placeholder */}
               <div style={{
                 position: "absolute",
@@ -394,6 +392,16 @@ const toggleFaq = (id: number) => {
     <div className="pdp-ritual-grid">
 
       <div className="pdp-ritual-image">
+        <img
+    src={PRODUCT_IMAGES.ritualLight}
+    alt="Ritual of Light"
+    style={{
+      width: "100%", height: "100%",
+      objectFit: "cover",
+      position: "absolute", inset: 0,
+      transition: "transform 0.6s ease",
+    }}
+  />
         <div className="pdp-ritual-image-inner">
           <div className="pdp-ritual-candle-large">
             <div className="pdp-ritual-wick" />

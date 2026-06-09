@@ -3447,4 +3447,549 @@
   }
 }
 
+/* ============================================
+   PHASE 7 — UI/UX POLISH
+   Luxury minimal refinements.
+============================================ */
+
+/* ── 1. Global transition baseline ── */
+*, *::before, *::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+button {
+  transition: background-color 0.2s ease,
+              color 0.2s ease,
+              border-color 0.2s ease,
+              opacity 0.2s ease,
+              transform 0.15s ease;
+}
+
+/* ── 2. Navbar polish ── */
+header {
+  transition: border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              background-color 0.3s ease;
+}
+
+/* Announcement bar — slightly more readable */
+header > div:first-child {
+  letter-spacing: 0.06em;
+}
+
+/* Nav link hover — underline grows from left */
+.nav-link-animated {
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-link-animated::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-ink);
+  transition: width 0.25s ease;
+}
+
+.nav-link-animated:hover::after {
+  width: 100%;
+}
+
+/* Cart icon — subtle scale on hover */
+header a[aria-label="Cart"]:hover,
+header button[aria-label="Search"]:hover {
+  opacity: 0.6;
+  transform: scale(1.05);
+}
+
+/* ── 3. Button polish ── */
+
+/* Primary buttons */
+.btn-primary {
+  transition: background-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Ghost buttons */
+.btn-ghost {
+  transition: background-color 0.2s ease,
+              color 0.2s ease,
+              border-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.btn-ghost:hover {
+  transform: translateY(-1px);
+}
+
+/* Gold buttons */
+.btn-gold {
+  transition: background-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-1px);
+}
+
+/* Login split button */
+.login-split-btn {
+  transition: background-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.login-split-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+/* Order confirmed CTA */
+.confirmed-cta-btn {
+  transition: background-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.confirmed-cta-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* ── 4. Product card hover — more refined ── */
+
+/* Shop cards */
+.shop-product-card {
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s ease;
+}
+
+.shop-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(26, 26, 26, 0.08);
+}
+
+/* Image zoom on card hover */
+.shop-product-image {
+  overflow: hidden;
+}
+
+.shop-product-image .shop-product-illustration {
+  transition: transform 0.5s ease;
+}
+
+.shop-product-card:hover .shop-product-illustration {
+  transform: scale(1.04);
+}
+
+/* ── 5. PDP section spacing refinement ── */
+
+/* Breathing room between PDP sections */
+.pdp-ritual-section {
+  margin-top: 0;
+}
+
+.pdp-upsell-section {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.pdp-complete-section {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.pdp-faq-section {
+  padding-top: 72px;
+  padding-bottom: 96px;
+}
+
+/* PDP quantity stepper — cleaner hover */
+.pdp-qty-btn {
+  transition: background-color 0.15s ease;
+}
+
+/* PDP tabs — smoother underline */
+.pdp-tab-btn {
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+/* ── 6. FAQ accordion refinement ── */
+.pdp-faq-trigger {
+  transition: opacity 0.2s ease;
+}
+
+.pdp-faq-trigger:hover {
+  opacity: 0.65;
+}
+
+.pdp-faq-icon svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pdp-faq-icon.open svg {
+  transform: rotate(45deg);
+}
+
+/* Remove duplicate rotation from parent */
+.pdp-faq-icon.open {
+  transform: none;
+}
+
+.pdp-faq-body {
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── 7. Category cards hover — smoother ── */
+.featured-grid a > div {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.featured-grid a > div:hover {
+  transform: scale(1.015);
+}
+
+/* ── 8. Footer refinement ── */
+footer a {
+  transition: color 0.2s ease;
+}
+
+/* Footer newsletter input focus */
+footer input[type="email"]:focus {
+  outline: none;
+  border-bottom-color: var(--color-ink);
+}
+
+/* ── 9. Form input refinement ── */
+.form-input:focus,
+.form-input-box:focus,
+.login-input-box:focus {
+  outline: none;
+}
+
+/* Input label — consistent uppercase spacing */
+.form-label,
+.login-input-label {
+  letter-spacing: 0.1em;
+}
+
+/* ── 10. Section label divider lines ── */
+.section-label::before,
+.section-label::after,
+.section-label-left::before {
+  transition: width 0.3s ease;
+}
+
+/* ── 11. Checkout step heading ── */
+/* Smoother step open/close */
+.checkout-step-body {
+  transition: padding 0.2s ease;
+}
+
+/* ── 12. Filter sidebar polish ── */
+.shop-filter-option {
+  transition: opacity 0.15s ease;
+}
+
+.shop-filter-option:hover {
+  opacity: 0.75;
+}
+
+.shop-active-pill {
+  transition: background-color 0.15s ease,
+              transform 0.1s ease;
+}
+
+.shop-active-pill:hover {
+  transform: scale(0.97);
+}
+
+/* ── 13. Admin table rows ── */
+.admin-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+/* ── 14. Mobile padding consistency ── */
+@media (max-width: 768px) {
+
+  /* Container padding uniform */
+  .lumos-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* Section spacing tighter on mobile */
+  .lumos-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  /* PDP sections mobile */
+  .pdp-upsell-section,
+  .pdp-complete-section,
+  .pdp-faq-section {
+    padding-top: 52px;
+    padding-bottom: 52px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  /* Ritual content mobile */
+  .pdp-ritual-content {
+    padding: 36px 20px;
+  }
+
+  /* Hero stats — tighter on small screens */
+  .hero-stats {
+    gap: 20px;
+  }
+
+  /* Shop page header — more breathing room */
+  .shop-page-header {
+    margin-bottom: 20px;
+  }
+
+  /* Account layout mobile */
+  .account-section {
+    padding: 24px 18px;
+  }
+
+  /* Cart layout mobile */
+  .cart-layout {
+    gap: 32px;
+  }
+
+  /* Login form padding */
+  .login-split-form-wrap {
+    padding: 32px 24px 48px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Extra small — prevent horizontal scroll */
+  .shop-product-grid {
+    gap: 1px;
+  }
+
+  .pdp-upsell-grid,
+  .pdp-complete-grid {
+    gap: 12px;
+  }
+
+  /* FAQ answer text */
+  .pdp-faq-answer {
+    font-size: 13px;
+  }
+
+  /* Confirmed page */
+  .confirmed-headline {
+    font-size: 30px;
+  }
+
+  /* Hero headline */
+  .text-display-hero-dark {
+    font-size: 40px;
+  }
+}
+
+/* ── 15. Overflow safety ── */
+html, body {
+  overflow-x: hidden;
+}
+
+.lumos-container {
+  overflow-x: hidden;
+}
+
+/* Prevent image overflow in cards */
+.shop-product-image,
+.pdp-ritual-image,
+.confirmed-item-thumb-placeholder,
+.account-order-thumb,
+.admin-product-thumb {
+  overflow: hidden;
+}
+
+/* ── 16. Focus visible — accessibility ── */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* ── 17. Selection color — brand touch ── */
+::selection {
+  background-color: var(--color-gold-faint);
+  color: var(--color-ink);
+}
+
+/* ============================================
+   PHASE 8 — IMAGE HOVER POLISH
+============================================ */
+.shop-product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.shop-product-card:hover .shop-product-img {
+  transform: scale(1.04);
+}
+
+.pdp-ritual-image img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pdp-ritual-section:hover .pdp-ritual-image img {
+  transform: scale(1.03);
+}
+
+/* ============================================
+   PHASE 8 — RESPONSIVE SWEEP
+============================================ */
+
+/* 390px — iPhone Pro */
+@media (max-width: 390px) {
+  .login-split-tabs {
+    gap: 14px;
+  }
+
+  .login-split-tab {
+    font-size: 26px;
+  }
+
+  .shop-page-title {
+    font-size: 28px;
+  }
+
+  .confirmed-headline {
+    font-size: 28px;
+  }
+
+  .confirmed-card {
+    margin: 0 -4px;
+  }
+
+  .pdp-upsell-grid,
+  .pdp-complete-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .btn, .btn-primary, .btn-ghost, .btn-gold {
+    padding: 12px 20px;
+    font-size: 10px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    font-size: 11px;
+    padding: 10px 12px;
+  }
+}
+
+/* 768px — Tablet */
+@media (max-width: 768px) {
+  .checkout-body {
+    padding-top: 32px;
+  }
+
+  .cart-layout {
+    padding-top: 32px;
+  }
+
+  .account-form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .confirmed-card-meta {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* Prevent text clip globally */
+h1, h2, h3, h4, h5, h6, p, span, a {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Prevent oversized buttons on small screens */
+@media (max-width: 480px) {
+  .login-split-btn {
+    padding: 14px 20px;
+    font-size: 13px;
+  }
+}
+
+/* ============================================
+   PHASE 8 — ACCESSIBILITY
+============================================ */
+
+/* Skip to main content — screen readers */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  background: var(--color-ink);
+  color: var(--color-white);
+  padding: 8px 16px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Ensure interactive elements have minimum tap size */
+@media (max-width: 768px) {
+  button, a, input[type="checkbox"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .shop-filter-checkbox {
+    min-height: unset;
+    min-width: unset;
+  }
+
+  .pdp-faq-trigger {
+    min-height: 52px;
+  }
+}
+
+/* Ensure text contrast on colored backgrounds */
+.shop-product-badge {
+  color: var(--color-ink);
+  background-color: rgba(248, 246, 241, 0.92);
+}
+
 }

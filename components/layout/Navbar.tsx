@@ -201,6 +201,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
+              className="nav-link-animated"
               onClick={() => setIsMenuOpen(false)}
               style={{
                 display: "block",
