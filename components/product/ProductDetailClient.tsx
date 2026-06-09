@@ -7,11 +7,12 @@ import ReviewSection from "@/components/product/ReviewSection";
 import ProductCard, { Product } from "@/components/shop/ProductCard";
 import { PRODUCT_IMAGES } from "@/lib/images";
 
-const product = {
+const fallbackProduct = {
   id: 1,
   collection: "Midnight Collection",
   name: "Celestial Bloom",
   price: 85,
+  image: PRODUCT_IMAGES.etherealBloom,
   description:
     "An ethereal blend inspired by a quiet, starlit night. Hand-poured with artisanal precision, capturing the tranquil essence of nightfall.",
   scentProfile: [
@@ -99,7 +100,11 @@ const faqItems = [
   },
 ];
 
-export default function ProductDetailClient() {
+export default function ProductDetailClient({
+  product = fallbackProduct,
+}: {
+  product?: typeof fallbackProduct;
+}) {
   const [quantity, setQuantity]   = useState(1);
   const [activeTab, setActiveTab] = useState("Mô tả");
 
@@ -172,8 +177,8 @@ const toggleFaq = (id: number) => {
               marginBottom: "12px",
             }}>
               <img
-    src={PRODUCT_IMAGES.etherealBloom}
-    alt="Celestial Bloom candle"
+    src={product.image}
+    alt={`${product.name} candle`}
     style={{
       width: "100%", height: "100%",
       objectFit: "cover",
