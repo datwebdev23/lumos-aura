@@ -149,30 +149,40 @@ export default function ContactClient() {
               </div>
             ))}
 
-            {/* Map placeholder */}
-            <div style={{
-              marginTop: "32px",
-              width: "100%", height: "220px",
-              backgroundColor: "var(--color-beige)",
-              borderRadius: "12px",
-              border: "1px solid var(--color-sand)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              flexDirection: "column", gap: "8px",
-            }}>
-              <span style={{ fontSize: "32px" }}>🗺️</span>
-              <p style={{
-                fontFamily: "var(--font-sans)", fontSize: "13px",
-                color: "var(--color-brown-light)", letterSpacing: "0.05em",
-              }}>
-                Google Maps
-              </p>
-              <p style={{
-                fontFamily: "var(--font-sans)", fontSize: "11px",
-                color: "var(--color-brown-light)",
-              }}>
-                (Tích hợp Google Maps API tại đây)
-              </p>
-            </div>
+            {/* Google Maps */}
+<div
+  style={{
+    marginTop: "32px",
+    width: "100%",
+    height: "260px",
+    backgroundColor: "var(--color-beige)",
+    borderRadius: "12px",
+    border: "1px solid var(--color-sand)",
+    overflow: "hidden",
+  }}
+>
+  <iframe
+    title="Lumos Aura location map"
+    src="https://www.google.com/maps?q=Ho%20Chi%20Minh%20City%2C%20Vietnam&output=embed"
+    width="100%"
+    height="100%"
+    style={{ border: 0, display: "block" }}
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  />
+</div>
+
+<p
+  style={{
+    marginTop: "12px",
+    fontFamily: "var(--font-sans)",
+    fontSize: "12px",
+    color: "var(--color-brown-light)",
+    lineHeight: 1.6,
+  }}
+>
+  Bản đồ hiển thị khu vực TP. Hồ Chí Minh — Lumos Aura hiện nhận đặt hàng online toàn quốc.
+</p>
           </div>
 
           {/* Right — Form */}
