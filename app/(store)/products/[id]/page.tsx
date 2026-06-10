@@ -1,17 +1,36 @@
-import ProductDetailPage from "@/components/product/ProductDetailClient";
-import { PRODUCT_DETAILS } from "@/lib/product-detail";
+import { notFound } from "next/navigation";
+import ProductDetailClient from "@/components/product/ProductDetailClient";
+import { getProductById } from "@/lib/product-detail";
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+type ProductPageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
+export async function generateMetadata({ params }: ProductPageProps) {
   const { id } = await params;
-  const productId = Number(id);
+  const product = getProductById(Number(id));
 
-  const product =
-  PRODUCT_DETAILS.find((item: (typeof PRODUCT_DETAILS)[number]) => item.id === productId) ??
-  PRODUCT_DETAILS[0];
+  if (!product) {
+    return {
+      title: "Product Not Found — Lumos Aura",
+    };
+  }
 
-  return <ProductDetailPage product={product} />;
+  return {
+    title: `${product.name} — Lumos Aura`,
+    description: product.description,
+  };
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params;
+  const product = getProductById(Number(id));
+
+  if (!product) {
+    notFound();
+  }
+
+  return <ProductDetailClient product={product} />;
 }

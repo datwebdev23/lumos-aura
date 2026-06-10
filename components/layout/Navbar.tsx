@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { RiSearchLine, RiShoppingBagLine, RiMenuLine, RiCloseLine } from "react-icons/ri";
+import { getCartCount } from "@/lib/cart";
 
 const navLinks = [
   { label: "Shop",   href: "/products" },
@@ -12,16 +13,29 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [isScrolled,  setIsScrolled]  = useState(false);
-  const [isMenuOpen,  setIsMenuOpen]  = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const pathname = usePathname();
-  const cartCount = 0;
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+  const updateCount = () => setCartCount(getCartCount());
+
+  updateCount();
+
+  window.addEventListener("storage", updateCount);
+  window.addEventListener("lumos-cart-updated", updateCount);
+
+  return () => {
+    window.removeEventListener("storage", updateCount);
+    window.removeEventListener("lumos-cart-updated", updateCount);
+  };
+}, []);
 
   return (
     <header style={{
@@ -33,11 +47,29 @@ export default function Navbar() {
       transition: "border-color 0.3s ease",
     }}>
 
+{/* Promo banner */}
+  <div
+    style={{
+      height: "32px",
+      backgroundColor: "var(--color-ink)",
+      color: "var(--color-white)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontFamily: "var(--font-sans)",
+      fontSize: "11px",
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+    }}
+  >
+    Free shipping on orders over $120 ✨
+  </div>
+
       {/* Main navbar */}
       <div className="lumos-container" style={{
         display: "flex",
         alignItems: "center",
-        height: "64px",
+        height: "72px",
         gap: "40px",
       }}>
 

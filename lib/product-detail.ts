@@ -25,8 +25,7 @@ export const PRODUCT_DETAILS = [
     name: "Palo Santo Glow",
     price: 52,
     image: PRODUCT_IMAGES.paloSanto,
-    description:
-      "A cleansing ritual scent with palo santo, myrrh, and bergamot.",
+    description: "A cleansing ritual scent with palo santo, myrrh, and bergamot.",
     scentProfile: [
       { type: "TOP", note: "Bergamot, Citrus Peel" },
       { type: "HEART", note: "Palo Santo, Myrrh" },
@@ -38,13 +37,30 @@ export const PRODUCT_DETAILS = [
     reviewCount: 98,
   },
   {
+    id: 3,
+    collection: "Fig Collection",
+    name: "Wild Fig",
+    price: 48,
+    image: PRODUCT_IMAGES.wildFig,
+    description:
+      "A fresh green fig candle with galbanum, cedarwood, and soft leafy notes.",
+    scentProfile: [
+      { type: "TOP", note: "Fig Leaf, Green Accord" },
+      { type: "HEART", note: "Galbanum, Cedarwood" },
+      { type: "BASE", note: "Musk, Soft Woods" },
+    ],
+    details: ["10 oz / 283g", "60-hour burn time", "Soy wax blend"],
+    badges: ["Fresh", "Handcrafted", "Gift Ready"],
+    rating: 4.6,
+    reviewCount: 72,
+  },
+  {
     id: 4,
     collection: "Floral Collection",
     name: "Ethereal Bloom",
     price: 48,
     image: PRODUCT_IMAGES.etherealBloom,
-    description:
-      "A soft floral candle with rose, bergamot, and patchouli.",
+    description: "A soft floral candle with rose, bergamot, and patchouli.",
     scentProfile: [
       { type: "TOP", note: "Bergamot, Pink Pepper" },
       { type: "HEART", note: "Rose, Jasmine" },
@@ -79,8 +95,7 @@ export const PRODUCT_DETAILS = [
     name: "Santal Embers",
     price: 68,
     image: PRODUCT_IMAGES.santalEmbers,
-    description:
-      "A smoky sandalwood candle with oud and soft embers.",
+    description: "A smoky sandalwood candle with oud and soft embers.",
     scentProfile: [
       { type: "TOP", note: "Cardamom, Clove" },
       { type: "HEART", note: "Sandalwood, Smoke" },
@@ -90,6 +105,24 @@ export const PRODUCT_DETAILS = [
     badges: ["Deep Scent", "Handcrafted", "Limited"],
     rating: 4.6,
     reviewCount: 63,
+  },
+  {
+    id: 7,
+    collection: "Green Tea Collection",
+    name: "Morning Dew",
+    price: 42,
+    image: PRODUCT_IMAGES.morningDew,
+    description:
+      "A clean morning scent with green tea, cucumber, and bright lemon.",
+    scentProfile: [
+      { type: "TOP", note: "Lemon, Bergamot" },
+      { type: "HEART", note: "Green Tea, Cucumber" },
+      { type: "BASE", note: "White Musk, Soft Woods" },
+    ],
+    details: ["8 oz / 226g", "40-hour burn time", "Clean wax blend"],
+    badges: ["Fresh", "Light Scent", "Everyday Ritual"],
+    rating: 4.7,
+    reviewCount: 84,
   },
   {
     id: 8,
@@ -109,4 +142,28 @@ export const PRODUCT_DETAILS = [
     rating: 4.7,
     reviewCount: 89,
   },
+  {
+    id: 9,
+    collection: "Spice Collection",
+    name: "Spiced Tobacco",
+    price: 62,
+    image: PRODUCT_IMAGES.spicedTobacco,
+    description:
+      "A warm spiced candle with tobacco leaf, cinnamon, and clove.",
+    scentProfile: [
+      { type: "TOP", note: "Cinnamon, Clove" },
+      { type: "HEART", note: "Tobacco Leaf, Tonka" },
+      { type: "BASE", note: "Amber, Vanilla" },
+    ],
+    details: ["12 oz / 340g", "80-hour burn time", "Cotton wick"],
+    badges: ["Warm", "Limited", "Deep Scent"],
+    rating: 4.8,
+    reviewCount: 112,
+  },
 ];
+
+export type ProductDetail = (typeof PRODUCT_DETAILS)[number];
+
+export function getProductById(id: number) {
+  return PRODUCT_DETAILS.find((product) => product.id === id);
+}

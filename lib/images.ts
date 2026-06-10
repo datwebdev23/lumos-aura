@@ -9,4 +9,7 @@ export const PRODUCT_IMAGES = {
   hero:           "https://images.unsplash.com/photo-1545150665-c8667f0a60df?w=1400&q=85&fit=crop",
   ritualLight:    "https://images.unsplash.com/photo-1595425964071-2c1ecb10b52d?w=900&q=80&fit=crop",
   featuredLarge:  "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=1000&q=80&fit=crop",
+  wildFig:        "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=900&auto=format&fit=crop&q=80",
+  morningDew:      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=900&auto=format&fit=crop&q=80",
+  spicedTobacco:   "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=900&auto=format&fit=crop&q=80",
 };

@@ -6,29 +6,8 @@ import { Button, Badge, QuantityStepper, StarRating } from "@/components/ui";
 import ReviewSection from "@/components/product/ReviewSection";
 import ProductCard, { Product } from "@/components/shop/ProductCard";
 import { PRODUCT_IMAGES } from "@/lib/images";
-
-const fallbackProduct = {
-  id: 1,
-  collection: "Midnight Collection",
-  name: "Celestial Bloom",
-  price: 85,
-  image: PRODUCT_IMAGES.etherealBloom,
-  description:
-    "An ethereal blend inspired by a quiet, starlit night. Hand-poured with artisanal precision, capturing the tranquil essence of nightfall.",
-  scentProfile: [
-    { type: "TOP",   note: "Bergamot, White Tea" },
-    { type: "HEART", note: "Night-Blooming Jasmine" },
-    { type: "BASE",  note: "Sandalwood, Amber" },
-  ],
-  details: [
-    "10 oz / 283g",
-    "60-hour burn time",
-    "Vegan coconut-soy wax blend",
-  ],
-  badges: ["Handcrafted", "Vegan Wax", "Free Shipping"],
-  rating: 4.8,
-  reviewCount: 124,
-};
+import { addCartItem } from "@/lib/cart";
+import type { ProductDetail } from "@/lib/product-detail";
 
 const tabs = ["Mô tả", "Tầng hương", "Chi tiết"];
 
@@ -100,11 +79,13 @@ const faqItems = [
   },
 ];
 
+type ProductDetailClientProps = {
+  product: ProductDetail;
+};
+
 export default function ProductDetailClient({
-  product = fallbackProduct,
-}: {
-  product?: typeof fallbackProduct;
-}) {
+  product,
+}: ProductDetailClientProps) {
   const [quantity, setQuantity]   = useState(1);
   const [activeTab, setActiveTab] = useState("Mô tả");
 
@@ -112,6 +93,19 @@ export default function ProductDetailClient({
 
 const toggleFaq = (id: number) => {
   setOpenFaq((prev) => (prev === id ? null : id));
+};
+
+const handleAddToCart = () => {
+  addCartItem({
+    id: product.id,
+    collection: product.collection,
+    name: product.name,
+    subtitle: product.details?.[0] ?? product.description,
+    price: product.price,
+    quantity,
+    image: product.image,
+    bg: "#E8E0D8",
+  });
 };
 
   return (
@@ -186,35 +180,6 @@ const toggleFaq = (id: number) => {
       transition: "transform 0.5s ease",
     }}
   />
-              {/* Candle illustration placeholder */}
-              <div style={{
-                position: "absolute",
-                inset: 0,
-                background: "linear-gradient(160deg, #F2EFE9 0%, #E8E0D5 100%)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-                <div style={{ opacity: 0.4 }}>
-                  <div style={{
-                    width: "2px", height: "20px",
-                    backgroundColor: "#8B6F4E",
-                    margin: "0 auto",
-                  }} />
-                  <div style={{
-                    width: "12px", height: "18px",
-                    backgroundColor: "#C9A96E",
-                    borderRadius: "50% 50% 30% 30%",
-                    margin: "-6px auto 0",
-                  }} />
-                  <div style={{
-                    width: "100px", height: "130px",
-                    backgroundColor: "#A08060",
-                    margin: "0 auto",
-                    borderRadius: "1px",
-                  }} />
-                </div>
-              </div>
             </div>
 
             {/* Thumbnails */}
@@ -369,22 +334,25 @@ const toggleFaq = (id: number) => {
                 onChange={setQuantity}
               />
               <Button
-                variant="primary"
-                fullWidth
-                onClick={() => {}}
-              >
-                Add to Cart
-              </Button>
+  variant="primary"
+  fullWidth
+  onClick={handleAddToCart}
+>
+  Add to Cart
+</Button>
             </div>
 
             {/* Buy now */}
             <Button
-              variant="ghost"
-              fullWidth
-              onClick={() => {}}
-            >
-              Buy Now
-            </Button>
+  variant="ghost"
+  fullWidth
+  onClick={() => {
+    handleAddToCart();
+    window.location.href = "/checkout";
+  }}
+>
+  Buy Now
+</Button>
 
           </div>
         </div>

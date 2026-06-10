@@ -1,56 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import {  useEffect, useState } from "react";
 import Link from "next/link";
 import { Button, QuantityStepper } from "@/components/ui";
+import {
+  getCartItems,
+  updateCartQuantity,
+  removeCartItem,
+  type CartItem,
+} from "@/lib/cart";
 
-type CartItem = {
-  id: number;
-  collection: string;
-  name: string;
-  subtitle: string;
-  price: number;
-  quantity: number;
-  bg: string;
-};
-
-const initialItems: CartItem[] = [
-  {
-    id: 1,
-    collection: "Midnight",
-    name: "Midnight Sandalwood",
-    subtitle: "8 oz / 50 Hour Burn",
-    price: 45,
-    quantity: 2,
-    bg: "#E8E0D8",
-  },
-  {
-    id: 2,
-    collection: "Amber",
-    name: "Celestial Amber Diffuser",
-    subtitle: "200ml / 6 Months",
-    price: 68,
-    quantity: 1,
-    bg: "#DDD5C8",
-  },
-];
 
 function formatUSD(amount: number) {
   return `$${amount.toFixed(2)}`;
 }
 
 export default function CartClient() {
-  const [items, setItems] = useState<CartItem[]>(initialItems);
+  const [items, setItems] = useState<CartItem[]>([]);
 
-  const updateQty = (id: number, qty: number) => {
-    setItems((prev) =>
-      prev.map((item) => item.id === id ? { ...item, quantity: qty } : item)
-    );
-  };
+useEffect(() => {
+  const syncCart = () => setItems(getCartItems());
 
-  const removeItem = (id: number) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+  syncCart();
+
+  window.addEventListener("storage", syncCart);
+  window.addEventListener("lumos-cart-updated", syncCart);
+
+  return () => {
+    window.removeEventListener("storage", syncCart);
+    window.removeEventListener("lumos-cart-updated", syncCart);
   };
+}, []);
+
+const updateQty = (id: number, qty: number) => {
+  updateCartQuantity(id, Math.max(1, qty));
+  setItems(getCartItems());
+};
+
+const removeItem = (id: number) => {
+  removeCartItem(id);
+  setItems(getCartItems());
+};
 
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -132,12 +122,29 @@ export default function CartClient() {
                 }}>
 
                   {/* Thumbnail */}
-                  <div style={{
-                    width: "80px",
-                    height: "80px",
-                    backgroundColor: item.bg,
-                    flexShrink: 0,
-                  }} />
+                  {item.image ? (
+  <img
+    src={item.image}
+    alt={item.name}
+    style={{
+      width: "80px",
+      height: "80px",
+      objectFit: "cover",
+      backgroundColor: item.bg ?? "var(--color-surface)",
+      flexShrink: 0,
+      display: "block",
+    }}
+  />
+) : (
+  <div
+    style={{
+      width: "80px",
+      height: "80px",
+      backgroundColor: item.bg ?? "var(--color-surface)",
+      flexShrink: 0,
+    }}
+  />
+)}
 
                   {/* Info */}
                   <div>
